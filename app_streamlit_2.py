@@ -12,8 +12,8 @@ st.set_page_config(page_title="Dashboard Insécurité Alimentaire", layout="wide
 # ============================================================
 # 🔹 Chargement des modèles
 # ============================================================
-rf_model = joblib.load("rf_model.pkl")
-xgb_model = joblib.load("xgb_model.pkl")
+rf_model = joblib.load("modele_food_insecurity.pkl")
+xgb_model = joblib.load("modele_food_insecurity_1.pkl")
 
 # ============================================================
 # 🔹 Chargement des données test
@@ -28,7 +28,7 @@ y_test_mapped = pd.read_csv("y_test_mapped.csv")["target"]
 def load_all_data():
     df_raw = pd.read_csv("data_encoded_1.csv")
     df_clean = pd.read_csv("data_clean.csv")
-    df_norm = pd.read_csv("data_normalized.csv")
+    df_norm = pd.read_csv("DDDIEMMME-D.xlsx")
     return df_raw, df_clean, df_norm
 
 df, df_clean, df_norm = load_all_data()
