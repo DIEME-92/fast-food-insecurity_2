@@ -112,6 +112,65 @@ elif modele == "XGBoost":
     ax.set_title("XGBoost - Performance")
     st.pyplot(fig)
 
+
+###################################################################""hhhhhhhhhhhhhhhhhhhhhhh##################################"
+##########################################################################################################################""""""""""
+########################################
+# 🔹 Matrice de confusion
+########################################
+
+from sklearn.metrics import confusion_matrix
+import numpy as np
+
+st.subheader("📌 Matrice de confusion")
+
+# 🔹 Sélecteur du modèle
+modele_cm = st.selectbox(
+    "Choisissez le modèle pour afficher la matrice de confusion :",
+    ["Random Forest", "XGBoost"],
+    key="cm_selector"
+)
+
+# 🔹 Charger les vraies prédictions (⚠️ remplace par tes vraies variables)
+# Exemple : si tu as déjà rf_preds et xgb_preds dans ton code
+# Sinon, décommente les lignes suivantes :
+
+# rf_preds = rf_model.predict(X_test_selected)
+# xgb_preds = xgb_model.predict(X_test_selected)
+
+# 🔹 Choix du modèle
+if modele_cm == "Random Forest":
+    y_pred_test = rf_preds
+else:
+    y_pred_test = xgb_preds
+
+# 🔹 Mapping des labels
+label_mapping = {0: "Modérée", 1: "Sévère"}
+
+# 🔹 Matrice de confusion
+conf_matrix = confusion_matrix(y_test_mapped, y_pred_test)
+
+fig, ax = plt.subplots(figsize=(7, 5))
+sns.heatmap(
+    conf_matrix,
+    annot=True,
+    fmt='d',
+    cmap='Blues',
+    xticklabels=[label_mapping[x] for x in np.unique(y_test_mapped)],
+    yticklabels=[label_mapping[x] for x in np.unique(y_test_mapped)],
+    ax=ax
+)
+
+ax.set_xlabel("Prédictions")
+ax.set_ylabel("Valeurs réelles")
+ax.set_title(f"Matrice de confusion - {modele_cm}")
+
+st.pyplot(fig)
+
+
+
+##########################################################################################################################################
+########################################################################################################################################""
 ########################################
 # 🔹 Formulaire de prédiction
 ########################################
