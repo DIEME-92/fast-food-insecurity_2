@@ -1,0 +1,11 @@
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+class PredictionLog(Base):
+    __tablename__ = "prediction_logs"
+    id = Column(Integer, primary_key=True, index=True)
+    niveau = Column(String)
+    profil = Column(String)
+    score = Column(String)
