@@ -78,15 +78,15 @@ if vars_selectionnees:
 # 📋 Performance - Random Forest
 rf_perf = pd.DataFrame({
     "Métrique": ["Accuracy", "AUC", "Recall"],
-    "Train": [0.996152, 0.986885, 0.973770],
-    "Test": [0.994231, 0.981481, 0.962963]
+    "Train": [0.973172, 0.968635, 0.937269],
+    "Test": [0.981092, 0.977833, 0.955665]
 })
 
 # 📋 Performance - XGBoost
 xgb_perf = pd.DataFrame({
     "Métrique": ["Accuracy", "AUC", "Recall"],
-    "Train": [0.996152, 0.986885, 0.973770],
-    "Test": [0.994231, 0.981481, 0.962963]
+    "Train": [0.973172, 0.968635, 0.937269],
+    "Test": [0.981092, 0.977833, 0.955665]
 })
 
 # 🔹 Sélecteur de modèle dans la sidebar
