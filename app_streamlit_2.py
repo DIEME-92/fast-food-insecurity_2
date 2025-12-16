@@ -106,55 +106,29 @@ xgb_perf = pd.DataFrame({
 # 🔹 Sélecteur de modèle dans la sidebar
 st.sidebar.subheader("⚙️ Choix du modèle à afficher")
 modele = st.sidebar.selectbox("Sélectionnez un modèle :", ["Random Forest", "XGBoost"])
-
 # 🔹 Affichage conditionnel
 if modele == "Random Forest":
     st.subheader("📋 Performance - Random Forest")
     st.dataframe(rf_perf)
 
     fig, ax = plt.subplots()
-    rf_perf.set_index("Métrique")[["Train","Test"]].plot(kind="bar", ax=ax, color=["#4CAF50","#2196F3"])
+    rf_perf.set_index("Métrique")[["Train","Test"]].plot(
+        kind="bar", ax=ax, color=["#4CAF50", "#2196F3"]
+    )
     ax.set_title("Random Forest - Performance")
     st.pyplot(fig)
-
-    # ✅ Case à cocher pour afficher la matrice de confusion
-    if st.sidebar.checkbox("📊 Afficher la matrice de confusion (Random Forest)", False):
-        y_pred_test = rf_model.predict(X_test_selected)
-        conf_matrix = confusion_matrix(y_test_mapped, y_pred_test)
-
-        st.subheader("📊 Matrice de confusion - Random Forest")
-        fig, ax = plt.subplots(figsize=(8, 6))
-        sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues',
-                    xticklabels=[label_mapping[x] for x in np.unique(y_test_mapped)],
-                    yticklabels=[label_mapping[x] for x in np.unique(y_test_mapped)],
-                    ax=ax)
-        ax.set_xlabel("Prédictions")
-        ax.set_ylabel("Valeurs réelles")
-        st.pyplot(fig)
 
 elif modele == "XGBoost":
     st.subheader("📋 Performance - XGBoost")
     st.dataframe(xgb_perf)
 
     fig, ax = plt.subplots()
-    xgb_perf.set_index("Métrique")[["Train","Test"]].plot(kind="bar", ax=ax, color=["#FF9800","#9C27B0"])
+    xgb_perf.set_index("Métrique")[["Train","Test"]].plot(
+        kind="bar", ax=ax, color=["#FF9800", "#9C27B0"]
+    )
     ax.set_title("XGBoost - Performance")
     st.pyplot(fig)
 
-    # ✅ Case à cocher pour afficher la matrice de confusion
-    if st.sidebar.checkbox("📊 Afficher la matrice de confusion (XGBoost)", False):
-        y_pred_test = xgb_model.predict(X_test_selected)
-        conf_matrix = confusion_matrix(y_test_mapped, y_pred_test)
-
-        st.subheader("📊 Matrice de confusion - XGBoost")
-        fig, ax = plt.subplots(figsize=(8, 6))
-        sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues',
-                    xticklabels=[label_mapping[x] for x in np.unique(y_test_mapped)],
-                    yticklabels=[label_mapping[x] for x in np.unique(y_test_mapped)],
-                    ax=ax)
-        ax.set_xlabel("Prédictions")
-        ax.set_ylabel("Valeurs réelles")
-        st.pyplot(fig)
 
 
 ###################################################################""hhhhhhhhhhhhhhhhhhhhhhh##################################"
