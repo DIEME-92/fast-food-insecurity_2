@@ -134,65 +134,6 @@ elif modele == "XGBoost":
 ###################################################################""hhhhhhhhhhhhhhhhhhhhhhh##################################"
 ##########################################################################################################################""""""""""
 ########################################
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-
-label_mapping = {0: "Modérée", 1: "Sévère"}
-
-# 🔹 Sélecteur de modèle
-modele = st.sidebar.selectbox("Sélectionnez un modèle :", ["Random Forest", "XGBoost"])
-
-# 🔹 Affichage des performances
-if modele == "Random Forest":
-    st.subheader("📋 Performance - Random Forest")
-    st.dataframe(rf_perf)
-
-    fig, ax = plt.subplots()
-    rf_perf.set_index("Métrique")[["Train","Test"]].plot(
-        kind="bar", ax=ax, color=["#4CAF50", "#2196F3"]
-    )
-    ax.set_title("Random Forest - Performance")
-    st.pyplot(fig)
-
-elif modele == "XGBoost":
-    st.subheader("📋 Performance - XGBoost")
-    st.dataframe(xgb_perf)
-
-    fig, ax = plt.subplots()
-    xgb_perf.set_index("Métrique")[["Train","Test"]].plot(
-        kind="bar", ax=ax, color=["#FF9800", "#9C27B0"]
-    )
-    ax.set_title("XGBoost - Performance")
-    st.pyplot(fig)
-
-# 🔹 Bloc unique de prédiction utilisateur
-st.subheader("📝 Prédiction avec vos données")
-q606 = st.number_input("Avoir faim mais ne pas manger (0 ou 1)", min_value=0, max_value=1)
-q605 = st.number_input("Ne plus avoir de nourriture / pas assez d'argent (0 ou 1)", min_value=0, max_value=1)
-q604 = st.number_input("Manger moins que ce que vous auriez dû (0 ou 1)", min_value=0, max_value=1)
-q603 = st.number_input("Sauter un repas (0 ou 1)", min_value=0, max_value=1)
-q601 = st.number_input("Ne pas manger de nourriture saine/nutritive (0 ou 1)", min_value=0, max_value=1)
-
-if st.button("Prédire"):
-    # Construire le DataFrame
-    X = pd.DataFrame([{
-        "q606_1_avoir_faim_mais_ne_pas_manger": q606,
-        "q605_1_ne_plus_avoir_de_nourriture_pas_suffisamment_d_argent": q605,
-        "q604_manger_moins_que_ce_que_vous_auriez_du": q604,
-        "q603_sauter_un_repas": q603,
-        "q601_ne_pas_manger_nourriture_saine_nutritive": q601
-    }])
-
-    # Faire la prédiction selon le modèle choisi
-    if modele == "Random Forest":
-        y_pred = rf_model.predict(X)
-    else:
-        y_pred = xgb_model.predict(X)
-
-    # Afficher le résultat
-    st.success(f"Résultat de la prédiction : {label_mapping[int(y_pred[0])]}")
-
 
 
 
