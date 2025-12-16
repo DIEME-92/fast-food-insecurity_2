@@ -142,7 +142,7 @@ if st.button("🔍 Lancer la prédiction"):
     }
 
     try:
-        response = requests.post("https://fastapi-food-insecurity.onrender.com/predict", json=payload)
+        response = requests.post("https://fast-food-insecurity_2.onrender.com/predict", json=payload)
         result = response.json()
 
         niveau = result.get("niveau", "inconnu")
