@@ -6,6 +6,22 @@ import seaborn as sns
 import pickle
 import joblib
 
+
+
+###########################################################"""chargement des modeles################################################################"
+
+
+# ✅ Charger les modèles sauvegardés
+@st.cache_resource
+def load_models():
+    rf_model = joblib.load("modele_food_insecurity_2.pkl")   # ou pickle.load(open(...))
+    xgb_model = joblib.load("modele_food_insecurity_1.pkl")
+    return rf_model, xgb_model
+
+rf_model, xgb_model = load_models()
+
+###################################################################################"chargement des donnees##########################################"
+
 # ✅ Chargement des données
 @st.cache(persist=True)
 def load_data():
@@ -30,23 +46,6 @@ variables = [
     "q603_sauter_un_repas",
     "q601_ne_pas_manger_nourriture_saine_nutritive"
 ]
-
-
-###########################################################"""chargement des modeles################################################################"
-
-
-# ✅ Charger les modèles sauvegardés
-@st.cache_resource
-def load_models():
-    rf_model = joblib.load("modele_food_insecurity_2.pkl")   # ou pickle.load(open(...))
-    xgb_model = joblib.load("modele_food_insecurity_1.pkl")
-    return rf_model, xgb_model
-
-rf_model, xgb_model = load_models()
-
-###################################################################################"chargement des donnees##########################################"
-
-
 
 
 ############################################################################################################################################"""
