@@ -8,3 +8,5 @@ numpy
 matplotlib
 seaborn
 xgboost
+python-dotenv
+sqlalchemy
