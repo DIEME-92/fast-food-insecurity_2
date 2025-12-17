@@ -161,11 +161,12 @@ if st.button("🔍 Lancer la prédiction"):
         "q605_1_ne_plus_avoir_de_nourriture_pas_suffisamment_d_argent": q605,
         "q604_manger_moins_que_ce_que_vous_auriez_du": q604,
         "q603_sauter_un_repas": q603,
-        "q601_ne_pas_manger_nourriture_saine_nutritive": q601
+        "q601_ne_pas_manger_nourriture_saine_nutritive": q601,
+        "modele": modele   # <-- ajout important pour choisir RF ou XGBoost
     }
 
     try:
-        response = requests.post("https://fast-food-insecurity-2.onrender.com/predict", json=payload)
+        response = requests.post("https://ton-api.onrender.com/predict", json=payload)
         result = response.json()
 
         niveau = result.get("niveau", "inconnu")
@@ -189,8 +190,8 @@ if st.button("🔍 Lancer la prédiction"):
         fig, ax = plt.subplots()
         labels = list(probabilites.keys())
         sizes = list(probabilites.values())
-        colors = ['#FDBE85', '#FF6F61']
-        ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
+        ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90,
+               colors=['#4CAF50', '#FF9800'])
         ax.axis('equal')
         st.pyplot(fig)
 
